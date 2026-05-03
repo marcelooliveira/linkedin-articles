@@ -109,7 +109,13 @@ Então finalmente montamos nosso prompt com instruções claras para o modelo, i
 > [!NOTE]
 > Note como nosso prompt já adere dinamicamente ao formato definido pelo record `CityInfo`. Isso significa que, se quisermos alterar o formato da resposta no futuro, basta atualizar o record `CityInfo` e a instrução no prompt será atualizada automaticamente, garantindo que o modelo siga o novo formato!
 
-## Solução Completa:
+## Conclusão
+
+A adoção de saídas estruturadas em LLMs deixou de ser um recurso opcional para se tornar uma prática fundamental na engenharia de software moderna.
+
+Ao forçar os modelos a operarem dentro de esquemas pré-definidos e tipados, você garante a robustez e a previsibilidade necessárias para integrar IA em fluxos de trabalho programáticos. Essas vantagens consolidam essa técnica como um padrão indispensável para sistemas de produção resilientes.
+
+## Solução Completa
 
 ```csharp
 using Microsoft.SemanticKernel;
@@ -335,4 +341,5 @@ namespace LlmStructuredOutputs
 Fontes:
 
 :link:[Technology Radar ThoughtWorks | Volume 34 | Abril 2026](https://www.thoughtworks.com/pt-br/radar)
+
 :link:[Microsoft Semantic Kernel Documentation](https://learn.microsoft.com/en-us/semantic-kernel/overview/)
