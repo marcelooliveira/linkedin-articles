@@ -1,6 +1,8 @@
 ﻿# .NET Semantic Kernel + Structured Output From LLMs
 
-![](img/celo.png)
+![Cover image courtesy of Alexandra Koch](img/cover.png)
+
+_Cover image: courtesy of Alexandra Koch (Pixabay)_
 
 Se você programa em .NET e gosta de ficar atualizado sobre IA, não pode deixar este artigo passar despercebido.
 
@@ -343,3 +345,5 @@ Fontes:
 :link:[Technology Radar ThoughtWorks | Volume 34 | Abril 2026](https://www.thoughtworks.com/pt-br/radar)
 
 :link:[Microsoft Semantic Kernel Documentation](https://learn.microsoft.com/en-us/semantic-kernel/overview/)
+
+:link: [Cover image: courtesy of Alexandra Koch](https://www.instagram.com/_alexandra_koch_)

@@ -17,7 +17,10 @@ namespace LlmStructuredOutputs
 		string Description,
 
 		[property: Description("A população estimada da cidade")]
-		int Population
+		int Population,
+
+		[property: Description("Uma breve descrição do clima")]
+		string Climate
 	);
 
 	public class Program
@@ -172,7 +175,8 @@ namespace LlmStructuredOutputs
 			var schemaExample = new CityInfo(
 				City: "string",
 				Description: "string",
-				Population: 0
+				Population: 0,
+				Climate: "string"
 			);
 
 			chatHistory.AddSystemMessage(
