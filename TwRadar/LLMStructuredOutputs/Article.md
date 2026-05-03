@@ -1,8 +1,10 @@
 ﻿# .NET Semantic Kernel + Structured Output From LLMs
 
+![](img/celo.png)
+
 Se você programa em .NET e gosta de ficar atualizado sobre IA, não pode deixar este artigo passar despercebido.
 
-Esses dias eu estava passeando pelo último **Technology Radar da ThoughtWorks**, e, como eu já esperava, notei várias tecnologias, técnicas, ferramentas, etc. relacionadas a **Inteligência Artificial**.
+Esses dias eu estava passeando pelo último [**Technology Radar da ThoughtWorks (abril 2026)**](https://www.thoughtworks.com/pt-br/radar), e, como eu já esperava, notei várias tecnologias, técnicas, ferramentas, etc. relacionadas a **Inteligência Artificial**.
 
 Um dos tópicos do **Radar** me chamou a atenção. **Saídas estruturadas de LLMs (Structured output from LLMs)**. Daí pensei: como aplicar esse conceito à linguagem C#?
 
@@ -16,7 +18,7 @@ Abaixo, o menu inicial da aplicação de exemplo deste artigo, onde o usuário p
 
 ![](img/menu-01.png)
 
-Ao escolher a opção 1, o usuário é instruído a fornecer o nome de uma cidade e país:
+Ao escolher a opção 1, o usuário é instruído a fornecer o nome de uma cidade e país: **Fortaleza, Brasil**
 
 ![](img/menu-02.png)
 
@@ -26,7 +28,9 @@ Veja que, ao prosseguir, o modelo retorna um texto bastante verboso, quase como 
 
 ![](img/menu-03.png)
 
-O problema é que, embora a resposta seja informativa, ela não é fácil de ser processada por um sistema. Se quisermos extrair informações específicas, como o nome da cidade, a descrição e a população, teríamos que usar técnicas de NLP (Natural Language Processing) para analisar o texto e extrair esses dados.
+![](img/ken-jeong-cant-see.gif)
+
+O problema é que, embora a resposta sobre a cidade de Fortaleza seja muito rica e envolvente, ela não é fácil de ser processada por um sistema. Se quisermos extrair informações específicas, como o nome da cidade, a descrição e a população, teríamos que usar técnicas de NLP (Natural Language Processing) para analisar o texto e extrair esses dados.
 
 Nesse caso, o risco de erros é alto, pois o modelo pode formatar a resposta de maneiras diferentes, usar sinônimos, ou até mesmo cometer erros de formatação.
 
@@ -50,6 +54,60 @@ Agora, na opção 2, o modelo é instruído a retornar uma resposta estruturada,
 
 ![](img/menu-04.png)
 
+Existem várias vantagens nessa abordagem:
+- **Custo**: Ao obter apenas as informações necessárias, você pode reduzir o número de tokens usados na resposta, o que pode levar a custos mais baixos ao usar APIs de LLMs.
+- **Precisão**: O modelo é instruído a seguir um formato específico, o que reduz a chance de erros de formatação ou variações inesperadas na resposta.
+- **Facilidade de Integração**: A resposta em JSON pode ser facilmente desserializada em objetos C# ou outras estruturas de dados, facilitando a integração com sistemas maiores.
+- **Manutenção**: Se o modelo retornar uma resposta inesperada, é mais fácil identificar o problema, pois a estrutura do JSON é clara e consistente.  
+
+## Teoria
+
+Primeiro definimos um record C# chamado `CityInfo`, que representa o esquema da resposta que queremos obter do modelo. Cada propriedade do record tem um atributo `Description` que fornece uma descrição clara do que cada campo representa.
+
+```csharp
+	public record CityInfo(
+		[property: Description("O nome da cidade")]
+		string City,
+
+		[property: Description("Uma breve descrição da cidade")]
+		string Description,
+
+		[property: Description("A população estimada da cidade")]
+		int Population
+	);
+```
+
+Então, antes de montarmos o prompt e enviarmos para o Semantic Kernel, criamos uma nova instância de `CityInfo` com valores de exemplo:
+
+```csharp
+			// Crie o prompt solicitando resposta estruturada
+			var chatHistory = new ChatHistory();
+
+			var schemaExample = new CityInfo(
+				City: "string",
+				Description: "string",
+				Population: 0
+			);
+```      
+
+Então finalmente montamos nosso prompt com instruções claras para o modelo, incluindo o esquema de resposta que queremos:
+
+```csharp
+			chatHistory.AddSystemMessage(
+				$"Você é um assistente que retorna informações sobre cidades APENAS em formato JSON válido. " +
+				$"O JSON deve seguir exatamente este schema: {JsonSerializer.Serialize(schemaExample)}"
+			);
+			chatHistory.AddUserMessage(pergunta);
+
+			// Obtenha a resposta
+			var result = await chatService.GetChatMessageContentAsync(
+				chatHistory,
+				executionSettings
+			);
+```
+
+> [!NOTE]
+> Note como nosso prompt já adere dinamicamente ao formato definido pelo record `CityInfo`. Isso significa que, se quisermos alterar o formato da resposta no futuro, basta atualizar o record `CityInfo` e a instrução no prompt será atualizada automaticamente, garantindo que o modelo siga o novo formato!
 
 ## Solução Completa:
 
@@ -223,9 +281,17 @@ namespace LlmStructuredOutputs
 
 			// Crie o prompt solicitando resposta estruturada
 			var chatHistory = new ChatHistory();
+
+			// Gera um exemplo do schema usando o próprio CityInfo
+			var schemaExample = new CityInfo(
+				City: "string",
+				Description: "string",
+				Population: 0
+			);
+
 			chatHistory.AddSystemMessage(
 				$"Você é um assistente que retorna informações sobre cidades APENAS em formato JSON válido. " +
-				$"O JSON deve seguir exatamente este schema: {JsonSerializer.Serialize(new { City = "string", Description = "string", Population = 0 })}"
+				$"O JSON deve seguir exatamente este schema: {JsonSerializer.Serialize(schemaExample)}"
 			);
 			chatHistory.AddUserMessage(pergunta);
 
@@ -269,3 +335,4 @@ namespace LlmStructuredOutputs
 Fontes:
 
 :link:[Technology Radar ThoughtWorks | Volume 34 | Abril 2026](https://www.thoughtworks.com/pt-br/radar)
+:link:[Microsoft Semantic Kernel Documentation](https://learn.microsoft.com/en-us/semantic-kernel/overview/)

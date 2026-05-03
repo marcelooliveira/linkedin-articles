@@ -167,9 +167,17 @@ namespace LlmStructuredOutputs
 
 			// Crie o prompt solicitando resposta estruturada
 			var chatHistory = new ChatHistory();
+
+			// Gera um exemplo do schema usando o próprio CityInfo
+			var schemaExample = new CityInfo(
+				City: "string",
+				Description: "string",
+				Population: 0
+			);
+
 			chatHistory.AddSystemMessage(
 				$"Você é um assistente que retorna informações sobre cidades APENAS em formato JSON válido. " +
-				$"O JSON deve seguir exatamente este schema: {JsonSerializer.Serialize(new { City = "string", Description = "string", Population = 0 })}"
+				$"O JSON deve seguir exatamente este schema: {JsonSerializer.Serialize(schemaExample)}"
 			);
 			chatHistory.AddUserMessage(pergunta);
 
