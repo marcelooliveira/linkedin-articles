@@ -1,12 +1,16 @@
 ﻿# .NET Semantic Kernel com Context Graph - Hands On
 
-![Cover image - Context Graph](https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1200)
+![Cover image - Context Graph](img/cover.png)
 
 _Cover image: courtesy of Unsplash_
 
 Se você programa em .NET e está explorando o universo de agentes de IA, este artigo é essencial para entender como dar memória institucional aos seus sistemas inteligentes.
 
-Continuando esta série sobre **Semantic Kernel** e técnicas avançadas de IA, hoje vamos mergulhar em um conceito poderoso que vem ganhando destaque: **Context Graph (Grafo de Contexto)**.
+No meu último artigo sobre [**LLM Structured Outputs**](https://www.linkedin.com/pulse/net-semantic-kernel-structured-output-from-llms-marcelo-oliveira-ajzlf/?trackingId=GA1k26CLTd6KaCAcEAlbog%3D%3D), vimos como forçar os modelos a responderem em formatos pré-definidos, garantindo robustez e previsibilidade. Hoje, vamos dar um passo além e explorar o conceito de **Context Graph (Grafo de Contexto)**, uma técnica avançada para modelar conhecimento institucional de forma consultável e legível por máquina.
+
+Continuando esta série sobre **Semantic Kernel** e ainda falando sobre o tema do último [**ThoughtWorks Radar de Abril de 2026**](https://www.thoughtworks.com/pt-br/radar), hoje vamos mergulhar em um conceito poderoso que vem ganhando destaque: **Context Graph (Grafo de Contexto)**.
+
+E a vantagem é que mais uma vez vamos fazer isso com a nossa plataforma favorita, o .NET.
 
 Enquanto sistemas tradicionais apenas registram **O QUE** aconteceu, um Context Graph captura **O PORQUÊ** - transformando decisões, políticas e raciocínio institucional em estrutura consultável e legível por máquina.
 
