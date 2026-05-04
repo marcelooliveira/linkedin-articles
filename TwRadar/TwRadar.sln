@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.37216.2 d17.14
+VisualStudioVersion = 17.14.37216.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LLMStructuredOutputs", "LLMStructuredOutputs\LLMStructuredOutputs.csproj", "{AA71885C-1C53-4371-95BC-1BA7D4490558}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContextGraph", "ContextGraph\ContextGraph.csproj", "{E3896748-A80D-40D0-B1FA-E8320C326DE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{AA71885C-1C53-4371-95BC-1BA7D4490558}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA71885C-1C53-4371-95BC-1BA7D4490558}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA71885C-1C53-4371-95BC-1BA7D4490558}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3896748-A80D-40D0-B1FA-E8320C326DE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3896748-A80D-40D0-B1FA-E8320C326DE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3896748-A80D-40D0-B1FA-E8320C326DE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3896748-A80D-40D0-B1FA-E8320C326DE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
